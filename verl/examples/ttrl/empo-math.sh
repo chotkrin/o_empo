@@ -32,7 +32,7 @@ DATA_LOCAL_DIR="/fs-computility/prime/zhangqingyang/data/MATH"
 BACKBONE_PATH="/fs-computility/prime/shared/llms/Qwen/${BACKBONE}"
 
 ENTROPY_THRES=1.0
-TARGET='voting'
+TARGET='semantic_entropy' # "gt" corresponds to GRPO, "semantic_entropy" to EMPO, and "voting" to TTRL
 
 MODEL="${TASK}-${BACKBONE}"
 EXPERIMENT="${TARGET}-Len@${K}k-bz-${DATA_TRAIN_BATCH_SIZE}-thres-${ENTROPY_THRES}"

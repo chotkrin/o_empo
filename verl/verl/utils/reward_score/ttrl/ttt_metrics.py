@@ -88,11 +88,11 @@ def test_time_train_metrics(
 
     true_rewards, _ = auto_verify(task, solutions, [ground_truth] * len(solutions), extra_info=extra_info)
     
-    assert reward_type in ['gt', 'semantic entropy', 'voting']
+    assert reward_type in ['gt', 'semantic_entropy', 'voting']
     if reward_type == 'voting':
         # TTRL rewards
         rewards, _ = auto_verify(task, solutions, [estimated_label] * len(solutions), extra_info=extra_info)
-    elif reward_type == 'semantic entropy':
+    elif reward_type == 'semantic_entropy':
         # EMPO rewards
         frequencies, unique_answers, unique_frequencies = semantic_cluster(task, model_answers, extra_info)
         rewards = entropy_thresholding(frequencies, unique_frequencies, low=0.0, high=entropy_thres)

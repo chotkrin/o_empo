@@ -4,19 +4,22 @@
 <a href="https://huggingface.co/collections/qingyangzhang/empo-67f9f7ad7817ebff4b664010">🤗 HF Models and Datasets Collection </a> |
 <a href="https://arxiv.org/abs/2504.05812"> 📑 Arxiv Preprint </a>
 
-For any questions, feel free to open an issue or directly contact to [Qingyang Zhang](qingyangzhang@tju.edu.cn), happy to help and disccuss!
+For any questions, feel free to open an issue or directly contact to [Qingyang Zhang](qingyangzhang@tju.edu.cn), happy to help and discuss!
 
 If you find this repo helpful, please consider to **star🌟** this repo for support our work 🙏🙏
 
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Overview](#overview)
-- [News](#news)
-- [TRL Quick Start](#trl-quick-start)
-- [Verl Quick Start](#verl-quick-start)
-- [Evaluation](#evaluation)
-- [Acknowledgement](#acknowledgement)
-- [Citation](#citation)
+- [EMPO: Fully Unsupervised LLM Reasoning Incentivization](#empo-fully-unsupervised-llm-reasoning-incentivization)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [News](#news)
+  - [Repository Structure](#repository-structure)
+  - [TRL Quick Start](#trl-quick-start)
+  - [Verl Quick Start](#verl-quick-start)
+  - [Evaluation](#evaluation)
+  - [Acknowledgement](#acknowledgement)
+  - [Related Works](#related-works)
+  - [Citation](#citation)
 
 
 ## Overview
@@ -33,9 +36,24 @@ EMPO (Entropy Minimized Policy Optimization) does not require any supervised inf
 - [2025-04-30] We release the training and evaluation code for both mathematical reasoning and free-form natural reasoning tasks.
 - [2025-06-10] EMPO was accepted by ICML 2025 Test-time Adaption Workshop. See you in Vancouver!
 
+## Repository Structure
+
+This repository contains **two self-contained implementations** of EMPO:
+
+- [`trl`](./trl/README.md): Based on Hugging Face’s trl, a cutting-edge library designed for post-training foundation models.
+
+&nbsp;&nbsp; ↳ Built on commit [v0.14-release](https://github.com/huggingface/trl/commits/v0.14-release)
+
+- [`verl`](./verl/README.md): Based on VERL, a high-performance RL training library designed for LLMs.
+
+&nbsp;&nbsp; ↳ Built on commit [v0.4x](https://github.com/volcengine/verl/tree/v0.4.x)
+
+
+Both are licensed under Apache 2.0 and include their respective `LICENSE` and `NOTICE` files.
+
 ## TRL Quick Start
 
-> Developed upon trl 0.14.0
+> Developed upon trl 0.14.0. See [`trl`](./trl/README.md) for details.
 
 ```
 cd trl
@@ -44,10 +62,12 @@ sh empo-1.5B-NM-COT-20K.sh
 ```
 
 ## Verl Quick Start
-> Developed upon TTRL, with necessary modification to upgrade to the latest verl==0.4.0
+> Developed upon TTRL, with necessary modification to upgrade to the latest verl==0.4.0. See [`verl`](./verl/README.md) for details.
 
 ```
 cd verl
+USE_MEGATRON=0 bash scripts/install_vllm_sglang_mcore.sh
+pip install --no-deps -e .
 sh examples/ttrl/empo-math.sh
 ```
 
@@ -61,7 +81,7 @@ cd eval_math
 sh test.sh
 ```
 
-As suggested by [Spurious Rewards](https://rethink-rlvr.notion.site/Spurious-Rewards-Rethinking-Training-Signals-in-RLVR-1f4df34dac1880948858f95aeb88872f) and [Incorrect Baseline](https://safe-lip-9a8.notion.site/Incorrect-Baseline-Evaluations-Call-into-Question-Recent-LLM-RL-Claims-2012f1fbf0ee8094ab8ded1953c15a37#2022f1fbf0ee80cb9b18f7eac460410a), we adpot the same test prompt to both pre-RL Qwen Base models and RL-trained models. Besdies, we add Random+Format Reward Baseline for more comprehensive comparison. You can also modify the code [here](https://github.com/QingyangZhang/EMPO/blob/main/eval_math/utils.py#L140) to investigate the influence of different test prompt.
+As suggested by [Spurious Rewards](https://rethink-rlvr.notion.site/Spurious-Rewards-Rethinking-Training-Signals-in-RLVR-1f4df34dac1880948858f95aeb88872f) and [Incorrect Baseline](https://safe-lip-9a8.notion.site/Incorrect-Baseline-Evaluations-Call-into-Question-Recent-LLM-RL-Claims-2012f1fbf0ee8094ab8ded1953c15a37#2022f1fbf0ee80cb9b18f7eac460410a), we adopt the same test prompt to both pre-RL Qwen Base models and RL-trained models. Besides, we add Random+Format Reward Baseline for more comprehensive comparison. You can also modify the code [here](https://github.com/QingyangZhang/EMPO/blob/main/eval_math/utils.py#L140) to investigate the influence of different test prompt.
 
 | Model                          | Supervision    | MATH | Minerva Math | Olympiad Bench | AIME24 | AMC23 | Avg. |
 |--------------------------------|----------------|------|--------------|----------------|--------|-------|------|
