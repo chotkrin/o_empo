@@ -61,6 +61,8 @@ pip install -r requirements.txt
 sh empo-1.5B-NM-COT-20K.sh
 ```
 
+Noted that trl 0.14.0 is already a relatively outdated training framework. We will choose verl for further development for efficiency and compatibility.
+
 ## Verl Quick Start
 > Developed upon TTRL, with necessary modification to upgrade to the latest verl==0.4.0. See [`verl`](./verl/README.md) for details.
 
