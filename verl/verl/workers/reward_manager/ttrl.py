@@ -44,7 +44,7 @@ class TTRLRewardManager:
 
 
     def _data_source_to_task(self, data_source):
-        if data_source in ["MATH-TTT", "AIME-TTT", "AMC-TTT", "deepscaler", 'numina_math', 'zwhe99/DeepMath']:
+        if data_source in ["MATH-TTT", "AIME-TTT", "AMC-TTT", "deepscaler", 'numina_math', 'zwhe99/DeepMath', 'math_dapo']:
             return "math"
         elif data_source in ["GPQA-TTT"]:
             return "gpqa"
